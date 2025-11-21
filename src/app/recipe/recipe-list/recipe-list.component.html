@@ -1,10 +1,15 @@
 <div>
   <div>
-    @if (selected) {
+    <!--Verificar que no sea null-->
+    @if (selectedRecipe) {
+    <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+  }
+  <!-- era así: @if (selected) {
     <div *ngIf="selected">
       <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
     </div>
     }
+    -->
     <table>
       <thead>
         <tr>
@@ -31,5 +36,59 @@
         }
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="row">
+@for(recipe of recipes; track recipe.id){
+<div class="col-md-4 mb-4">
+  
+    <div class="card" style="width: 15rem;">
+      <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.nombre">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.nombre }}</h5>
+        <p class="card-text">
+          <strong>Porciones:</strong> {{ recipe.porciones }}<br>
+          <strong>Tiempo:</strong> {{ recipe.tiempo_minutos }} min
+
+
+          <strong>Ingredientes:</strong> {{ recipe.ingredientes.length }}
+
+        </p>
+        <a [routerLink]="['/recipe', recipe.id]" class="btn btn-primary">Ver detalle</a>
+      </div>
+    </div>
+  
+</div>
+}
+</div>
+
+<div class="container">
+  <h2>Recetas</h2>
+  
+  @if (selectedRecipe) {
+    <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+  }
+
+  <div class="row">
+    @for(recipe of recipes; track recipe.id){
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.nombre">
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.nombre }}</h5>
+            <p class="card-text">
+              <strong>Porciones:</strong> {{ recipe.porciones }}<br>
+              <strong>Tiempo:</strong> {{ recipe.tiempo_minutos }} min
+              
+
+          <strong>Ingredientes:</strong> {{ recipe.ingredientes.length }}
+          
+            </p>
+            <a [routerLink]="['/recipe', recipe.id]" class="btn btn-primary">Ver detalle</a>
+          </div>
+        </div>
+      </div>
+    }
   </div>
 </div>

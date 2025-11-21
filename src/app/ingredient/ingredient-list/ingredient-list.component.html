@@ -9,3 +9,14 @@
   </li>
   }
 </ul>
+
+<ul class="list-group">
+  @for (ingredient of ingredients; track ingredient.nombre){
+    <li class="list-group-item">
+      <span>{{ ingredient.nombre }}</span>
+      @if (ingredient.cantidad) {
+        <span> - {{ ingredient.cantidad }} {{ ingredient.unidad }}</span>
+      }
+    </li>
+  }
+</ul>

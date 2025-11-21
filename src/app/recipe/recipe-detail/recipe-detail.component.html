@@ -11,6 +11,9 @@
   <app-ingredient-list
     [ingredients]="recipe.ingredientes"
   ></app-ingredient-list>
+  @if (maxIngredient) {
+              <p><strong>Ingrediente con mayor cantidad:</strong> {{ maxIngredient.nombre }}</p>}
+            
 
   <h3>Pasos</h3>
   <ol>
@@ -20,4 +23,39 @@
     </li>
     }
   </ol>
+</div>
+
+
+<div class="container mt-4">
+  @if (recipe) {
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="recipe.imagen" class="img-fluid rounded-start" [alt]="recipe.nombre">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h2 class="card-title">{{ recipe.nombre }}</h2>
+            <p><strong>Porciones:</strong> {{ recipe.porciones }}</p>
+            <p><strong>Tiempo:</strong> {{ recipe.tiempo_minutos }} min</p>
+            @if (maxIngredient) {
+              <p><strong>Ingrediente con mayor cantidad:</strong> {{ maxIngredient.nombre }}</p>}
+            
+            <h3>Ingredientes</h3>
+            
+              <app-ingredient-list [ingredients]="recipe.ingredientes"></app-ingredient-list>
+
+            <h3>Pasos</h3>
+            <ol>
+              @for(step of recipe.pasos; track step){
+                <li>{{ step }}</li>
+              }
+            </ol>
+
+            <a routerLink="/recipe" class="btn btn-primary mt-3">Volver al listado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>
